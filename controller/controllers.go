@@ -3,7 +3,6 @@ package controller
 import (
 	"encoding/json"
 	"net/http"
-	"strconv"
 
 	"github.com/lanpaiva/teste/database"
 
@@ -26,9 +25,8 @@ func FindById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	for _, user := range user.Users {
-		if strconv.Itoa(user.ID) == id {
-			json.NewEncoder(w).Encode(user)
-		}
-	}
+	var client []user.User
+
+	database.DB.First(&client, id)
+	json.NewEncoder(w).Encode(client)
 }
