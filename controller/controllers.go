@@ -43,7 +43,6 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func AllUsers(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	var client []user.User
 	database.DB.Find(&client)
 	json.NewEncoder(w).Encode(client)

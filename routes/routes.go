@@ -6,10 +6,12 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/lanpaiva/teste/controller"
+	"github.com/lanpaiva/teste/middleware"
 )
 
 func Handler() {
 	r := mux.NewRouter()
+	r.Use(middleware.ContentTypeMiddleware)
 
 	r.HandleFunc("/", controller.Home)
 	r.HandleFunc("/users", controller.AllUsers).Methods("Get")
